@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wilpop Photographe — Portrait, mariage, graduation, street photography et événements.">
+  <title>Wilpop Photographe | Capturer l'instant</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:Arial,Helvetica,sans-serif;background:#090909;color:#f5f1e8;line-height:1.6}
+    a{text-decoration:none;color:inherit}
+    .gold{color:#c9a45c}
+    nav{position:fixed;top:0;left:0;width:100%;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:20px 6%;background:rgba(9,9,9,.82);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,164,92,.2)}
+    .brand{display:flex;align-items:center;gap:10px;font-size:20px;letter-spacing:4px;font-weight:800}.brand span{display:block;font-size:9px;letter-spacing:5px;color:#c9a45c;text-align:right}
+    .logo-mark{width:38px;height:38px;display:block;flex:none}
+    .change-photo{position:absolute;top:12px;right:12px;z-index:5;background:rgba(9,9,9,.88);border:1px solid #c9a45c;color:#f5f1e8;padding:8px 10px;font-size:9px;letter-spacing:1px;text-transform:uppercase;cursor:pointer}
+    .change-photo:hover{background:#c9a45c;color:#090909}
+    .photo-input{display:none}
+    .about-photo{position:relative}
+    nav ul{display:flex;gap:28px;list-style:none;font-size:13px;text-transform:uppercase;letter-spacing:1px}
+    nav li a:hover{color:#c9a45c}
+    .hero{min-height:100vh;display:flex;align-items:center;padding:130px 8% 80px;position:relative;overflow:hidden;background:radial-gradient(circle at 75% 35%,#30271a 0,#12100d 24%,#090909 60%)}
+    .hero:after{content:"";position:absolute;width:55vw;height:55vw;border:1px solid rgba(201,164,92,.2);border-radius:50%;right:-20vw;top:18%;box-shadow:0 0 100px rgba(201,164,92,.08)}
+    .hero-content{max-width:760px;position:relative;z-index:2}
+    .eyebrow{letter-spacing:5px;text-transform:uppercase;color:#c9a45c;font-size:12px;margin-bottom:18px}
+    h1{font-family:Georgia,serif;font-size:clamp(54px,9vw,105px);line-height:.92;letter-spacing:-4px}
+    h1 em{font-weight:normal;color:#c9a45c}
+    .hero p{max-width:570px;margin:28px 0 35px;color:#bdb7ac;font-size:18px}
+    .buttons{display:flex;gap:14px;flex-wrap:wrap}
+    .btn{padding:14px 24px;border:1px solid #c9a45c;text-transform:uppercase;letter-spacing:1.5px;font-size:11px;transition:.25s}
+    .btn.primary{background:#c9a45c;color:#090909}.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
+    section{padding:100px 8%}
+    .section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:42px}
+    .section-head h2{font-family:Georgia,serif;font-size:48px;font-weight:normal}.section-head p{color:#999;max-width:420px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{min-height:330px;position:relative;overflow:hidden;border:1px solid #242424;background:linear-gradient(145deg,#242018,#0e0e0e)}
+    .card:nth-child(2){min-height:410px}.card:nth-child(4){min-height:410px}
+    .placeholder{position:absolute;inset:0;background:radial-gradient(circle at 50% 35%,rgba(201,164,92,.22),transparent 35%),linear-gradient(145deg,#1d1b17,#080808)}
+    .placeholder:before{content:"PHOTO À REMPLACER";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:10px;letter-spacing:3px;color:#766d5c}
+    .card-info{position:absolute;bottom:0;left:0;right:0;padding:28px;background:linear-gradient(transparent,rgba(0,0,0,.95))}
+    .card-info h3{font-family:Georgia,serif;font-size:27px;font-weight:normal}.card-info span{font-size:10px;letter-spacing:2px;color:#c9a45c;text-transform:uppercase}
+    .services{background:#0d0d0d}
+    .service-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #292929;border-left:1px solid #292929}
+    .service{padding:35px 25px;min-height:190px;border-right:1px solid #292929;border-bottom:1px solid #292929}
+    .num{color:#c9a45c;font-size:12px}.service h3{font-family:Georgia,serif;font-size:24px;font-weight:normal;margin:20px 0 8px}.service p{color:#888;font-size:14px}
+    .about{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+    .about-photo{min-height:480px;background:linear-gradient(145deg,#282116,#0b0b0b);border:1px solid #2e281e;display:flex;align-items:center;justify-content:center;color:#756a56;letter-spacing:3px;font-size:10px}
+    .about h2{font-family:Georgia,serif;font-size:50px;font-weight:normal;margin-bottom:20px}.about p{color:#aaa;margin-bottom:20px}
+    .contact{text-align:center;background:linear-gradient(180deg,#0d0d0d,#16130e)}
+    .contact h2{font-family:Georgia,serif;font-size:56px;font-weight:normal}.contact>p{color:#999;margin:15px auto 35px;max-width:550px}
+    .contact-links{display:flex;justify-content:center;gap:15px;flex-wrap:wrap}.contact-links a{border:1px solid #34302a;padding:15px 20px;color:#d9d2c6}.contact-links a:hover{border-color:#c9a45c;color:#c9a45c}
+    footer{padding:30px 8%;display:flex;justify-content:space-between;color:#777;font-size:11px;border-top:1px solid #222}
+    @media(max-width:800px){
+      nav{padding:17px 5%}nav ul{display:none}
+      section{padding:75px 6%}.hero{padding:120px 6% 70px}
+      .grid{grid-template-columns:1fr 1fr}.card,.card:nth-child(2),.card:nth-child(4){min-height:300px}
+      .service-grid{grid-template-columns:1fr 1fr}.about{grid-template-columns:1fr;gap:35px}.about-photo{min-height:330px}
+      .section-head{display:block}.section-head p{margin-top:12px}.contact h2{font-size:42px}
+      footer{display:block;text-align:center}footer div{margin-top:8px}
+    }
+    @media(max-width:480px){.grid,.service-grid{grid-template-columns:1fr}.hero p{font-size:16px}h1{font-size:58px}}
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="brand" href="#accueil">
+      <svg class="logo-mark" viewBox="0 0 100 100" aria-label="Logo Wilpop">
+        <path d="M14 35 L28 16 H72 L86 35 V84 H14 Z" fill="none" stroke="#c9a45c" stroke-width="5"/>
+        <path d="M28 43 L40 27 L50 43 L60 27 L72 43" fill="none" stroke="#c9a45c" stroke-width="5"/>
+        <text x="50" y="68" text-anchor="middle" fill="#f5f1e8" font-size="35" font-family="Georgia" font-weight="bold">W</text>
+      </svg>
+      <div>WILPOP<span>PHOTOGRAPHE</span></div>
+    </a>
+    <ul>
+      <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#apropos">À propos</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="hero" id="accueil">
+      <div class="hero-content">
+        <div class="eyebrow">Wilpop Photographe</div>
+        <h1>Capturer<br><em>l'instant.</em></h1>
+        <p>Portraits, mariages, graduations, événements et street photography. Des images pensées pour raconter une histoire et garder l'émotion vivante.</p>
+        <div class="buttons">
+          <a class="btn primary" href="#portfolio">Voir le portfolio</a>
+          <a class="btn" href="#contact">Réserver une séance</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio">
+      <div class="section-head">
+        <div><div class="eyebrow">Sélection</div><h2>Mon portfolio</h2></div>
+        <p>Les images ci-dessous sont des espaces réservés. Tes propres photographies pourront être ajoutées plus tard.</p>
+      </div>
+      <div class="grid">
+        <article class="card photo-card"><div class="placeholder" id="photo1"></div><input class="photo-input" id="file1" type="file" accept="image/*" onchange="changePhoto(1,event)"><button class="change-photo" onclick="document.getElementById('file1').click()">Changer photo</button><div class="card-info"><span>01 — Portrait</span><h3>Portrait</h3></div></article>
+        <article class="card photo-card"><div class="placeholder" id="photo2"></div><input class="photo-input" id="file2" type="file" accept="image/*" onchange="changePhoto(2,event)"><button class="change-photo" onclick="document.getElementById('file2').click()">Changer photo</button><div class="card-info"><span>02 — Wedding</span><h3>Mariage</h3></div></article>
+        <article class="card photo-card"><div class="placeholder" id="photo3"></div><input class="photo-input" id="file3" type="file" accept="image/*" onchange="changePhoto(3,event)"><button class="change-photo" onclick="document.getElementById('file3').click()">Changer photo</button><div class="card-info"><span>03 — Graduation</span><h3>Graduation</h3></div></article>
+        <article class="card photo-card"><div class="placeholder" id="photo4"></div><input class="photo-input" id="file4" type="file" accept="image/*" onchange="changePhoto(4,event)"><button class="change-photo" onclick="document.getElementById('file4').click()">Changer photo</button><div class="card-info"><span>04 — Street</span><h3>Street Photo</h3></div></article>
+        <article class="card photo-card"><div class="placeholder" id="photo5"></div><input class="photo-input" id="file5" type="file" accept="image/*" onchange="changePhoto(5,event)"><button class="change-photo" onclick="document.getElementById('file5').click()">Changer photo</button><div class="card-info"><span>05 — Event</span><h3>Événements</h3></div></article>
+        <article class="card photo-card"><div class="placeholder" id="photo6"></div><input class="photo-input" id="file6" type="file" accept="image/*" onchange="changePhoto(6,event)"><button class="change-photo" onclick="document.getElementById('file6').click()">Changer photo</button><div class="card-info"><span>06 — Creative</span><h3>Créatif</h3></div></article>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="section-head">
+        <div><div class="eyebrow">Ce que je fais</div><h2>Services</h2></div>
+        <p>Des séances adaptées à ton histoire, ton style et ton événement.</p>
+      </div>
+      <div class="service-grid">
+        <div class="service"><span class="num">01</span><h3>Portrait</h3><p>Séances individuelles, lifestyle et portraits créatifs.</p></div>
+        <div class="service"><span class="num">02</span><h3>Mariage</h3><p>Les moments forts, les détails et les émotions du grand jour.</p></div>
+        <div class="service"><span class="num">03</span><h3>Graduation</h3><p>Des souvenirs élégants pour célébrer une étape importante.</p></div>
+        <div class="service"><span class="num">04</span><h3>Événements</h3><p>Couverture photo pour événements privés, culturels et professionnels.</p></div>
+      </div>
+    </section>
+
+    <section class="about" id="apropos">
+      <div class="about-photo">
+        <div id="aboutPhotoLabel">TA PHOTO DE PHOTOGRAPHE — À AJOUTER</div>
+        <input class="photo-input" id="aboutFile" type="file" accept="image/*" onchange="changeAboutPhoto(event)">
+        <button class="change-photo" onclick="document.getElementById('aboutFile').click()">Changer photo</button>
+      </div>
+      <div>
+        <div class="eyebrow">À propos</div>
+        <h2>Une image.<br><span class="gold">Une émotion.</span></h2>
+        <p>Bienvenue chez Wilpop Photographe. Mon objectif est de transformer les moments réels en images qui restent.</p>
+        <p>Cette section pourra être personnalisée avec ta biographie, ton parcours, ton style photographique et ta vision.</p>
+        <a class="btn" href="#contact">Me contacter</a>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="eyebrow">Disponible pour vos projets</div>
+      <h2>Créons quelque chose<br><span class="gold">d'inoubliable.</span></h2>
+      <p>Pour une séance, un mariage, une graduation ou un événement, contacte Wilpop Photographe.</p>
+      <div class="contact-links">
+        <a href="https://wa.me/50935648267" target="_blank">WhatsApp · 3564 8267</a>
+        <a href="https://instagram.com/wilpopphotographe" target="_blank">Instagram · @wilpopphotographe</a>
+        <a href="mailto:wilgensamilcar81@gmail.com">Email · wilgensamilcar81@gmail.com</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>© 2026 WILPOP PHOTOGRAPHE</div>
+    <div>Capturer l'instant. Raconter l'émotion.</div>
+  </footer>
+  <script>
+    function changePhoto(id, event){
+      const file = event.target.files[0];
+      if(!file) return;
+      const url = URL.createObjectURL(file);
+      const box = document.getElementById("photo"+id);
+      box.style.backgroundImage = `url("${url}")`;
+      box.style.backgroundSize = "cover";
+      box.style.backgroundPosition = "center";
+      box.style.backgroundRepeat = "no-repeat";
+      box.style.background = `linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.35)), url("${url}") center/cover no-repeat`;
+      box.querySelector?.(".placeholder");
+    }
+    function changeAboutPhoto(event){
+      const file = event.target.files[0];
+      if(!file) return;
+      const url = URL.createObjectURL(file);
+      const box = document.querySelector(".about-photo");
+      box.style.background = `linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.35)), url("${url}") center/cover no-repeat`;
+      document.getElementById("aboutPhotoLabel").style.display = "none";
+    }
+  </script>
+</body>
+</html>
